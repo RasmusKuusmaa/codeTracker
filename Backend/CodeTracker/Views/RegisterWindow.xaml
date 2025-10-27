@@ -12,14 +12,14 @@
     </Window.DataContext>
     <StackPanel Margin="10">
         <Label Content="Username"/>
-        <TextBox Width="100" HorizontalAlignment="Left"/>
+        <TextBox Text="{Binding Username}" Width="100" HorizontalAlignment="Left"/>
 
         <Label Content="Password"/>
-        <PasswordBox HorizontalAlignment="Left" Width="100"/>
+        <PasswordBox x:Name="psbx" PasswordChanged="psbx_PasswordChanged" HorizontalAlignment="Left" Width="100"/>
 
         <Label Content="Confirm Password"/>
-        <PasswordBox HorizontalAlignment="Left" Width="100"/>
-        <Button Content="Create an account" Margin="0 20" Width="120" HorizontalAlignment="Left"/>
+        <PasswordBox HorizontalAlignment="Left" Width="100" x:Name="confpsbx" PasswordChanged="confpsbx_PasswordChanged"/>
+        <Button Command="{Binding RegisterUserCommand}" Content="Create an account" Margin="0 20" Width="120" HorizontalAlignment="Left"/>
         <Button Content="Go to login" Command="{Binding GoToLoginCommand}" Width="120" HorizontalAlignment="Left"/>
     </StackPanel>
 </Window>

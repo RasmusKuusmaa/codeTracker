@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeTracker.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,22 @@ namespace CodeTracker.Views
         public RegisterWindow()
         {
             InitializeComponent();
+        }
+
+        private void psbx_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is RegisterViewModel vm)
+            {
+                vm.Password = psbx.Password;
+            }
+        }
+
+        private void confpsbx_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is RegisterViewModel vm)
+            {
+                vm.ConfirmPassword = confpsbx.Password;
+            }
         }
     }
 }
