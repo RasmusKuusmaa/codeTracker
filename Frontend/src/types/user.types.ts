@@ -22,3 +22,9 @@ export interface UserResponse {
     user_id: number;
     username: string;
 }
+
+export interface LoginResponse {
+    user_id: number;
+    username: string;
+    token: string;
+}

@@ -1,14 +1,15 @@
 import { FastifyInstance } from 'fastify';
 import userController from '../controllers/user.controller';
+import { authenticate } from '../middleware/auth';
 
 async function userRoutes(fastify: FastifyInstance) {
-    // Get all users
-    fastify.get('/users', userController.getAllUsers.bind(userController));
+    // Get all users (protected route)
+    fastify.get('/users', { preHandler: authenticate }, userController.getAllUsers.bind(userController));
 
-    // Register new user
+    // Register new user (public route)
     fastify.post('/register', userController.register.bind(userController));
 
-    // Login user
+    // Login user (public route)
     fastify.post('/login', userController.login.bind(userController));
 }
 

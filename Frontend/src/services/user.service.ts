@@ -1,8 +1,9 @@
 import userModel from '../models/user.model';
-import { UserResponse, CreateUserDTO } from '../types/user.types';
+import { UserResponse, CreateUserDTO, LoginResponse } from '../types/user.types';
 import { AppError } from '../types/common.types';
 import { logger } from '../utils/logger';
 import bcrypt from 'bcrypt';
+import { generateToken } from '../utils/jwt';
 
 export class UserService {
     async getAllUsers(): Promise<UserResponse[]> {
@@ -51,7 +52,7 @@ export class UserService {
         }
     }
 
-    async loginUser(credentials: CreateUserDTO): Promise<UserResponse> {
+    async loginUser(credentials: CreateUserDTO): Promise<LoginResponse> {
         try {
             if (!credentials.username || credentials.username.trim().length === 0) {
                 throw new AppError(400, 'Username is required');
@@ -71,9 +72,15 @@ export class UserService {
                 throw new AppError(401, 'Invalid username or password');
             }
 
-            return {
+            const token = generateToken({
                 user_id: user.user_id,
                 username: user.username
+            });
+
+            return {
+                user_id: user.user_id,
+                username: user.username,
+                token
             };
         } catch (error) {
             logger.error('Error in loginUser service:', error);
