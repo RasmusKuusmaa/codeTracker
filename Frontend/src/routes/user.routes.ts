@@ -7,6 +7,9 @@ async function userRoutes(fastify: FastifyInstance) {
 
     // Register new user
     fastify.post('/register', userController.register.bind(userController));
+
+    // Login user
+    fastify.post('/login', userController.login.bind(userController));
 }
 
 export default userRoutes;

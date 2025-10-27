@@ -23,8 +23,8 @@ export class UserService {
                 throw new AppError(400, 'Username is required');
             }
 
-            if (!userData.password) {
-                throw new AppError(400, 'Password is required');
+            if (!userData.password || userData.password.length < 6) {
+                throw new AppError(400, 'Password must be at least 6 characters');
             }
 
             const existingUser = await userModel.findByUsername(userData.username);
@@ -40,6 +40,35 @@ export class UserService {
             };
         } catch (error) {
             logger.error('Error in registerUser service:', error);
+            throw error;
+        }
+    }
+
+    async loginUser(credentials: CreateUserDTO): Promise<UserResponse> {
+        try {
+            if (!credentials.username || credentials.username.trim().length === 0) {
+                throw new AppError(400, 'Username is required');
+            }
+
+            if (!credentials.password) {
+                throw new AppError(400, 'Password is required');
+            }
+
+            const user = await userModel.findByUsername(credentials.username);
+            if (!user) {
+                throw new AppError(401, 'Invalid username or password');
+            }
+
+            if (user.password !== credentials.password) {
+                throw new AppError(401, 'Invalid username or password');
+            }
+
+            return {
+                user_id: user.user_id,
+                username: user.username
+            };
+        } catch (error) {
+            logger.error('Error in loginUser service:', error);
             throw error;
         }
     }

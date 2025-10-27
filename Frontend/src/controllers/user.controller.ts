@@ -48,6 +48,30 @@ export class UserController {
             });
         }
     }
+
+    async login(
+        request: FastifyRequest<{ Body: CreateUserDTO }>,
+        reply: FastifyReply
+    ): Promise<void> {
+        try {
+            const credentials = request.body;
+            const user = await userService.loginUser(credentials);
+
+            const response: ApiResponse = {
+                success: true,
+                data: user,
+                message: 'Login successful'
+            };
+
+            reply.code(200).send(response);
+        } catch (error: any) {
+            logger.error('Error in login controller:', error);
+            reply.code(error.statusCode || 500).send({
+                success: false,
+                error: error.message || 'Internal server error'
+            });
+        }
+    }
 }
 
 export default new UserController();
