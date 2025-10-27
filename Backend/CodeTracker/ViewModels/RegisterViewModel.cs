@@ -6,16 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CodeTracker.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
-        private void GoToRegister()
+    
+
+        private void GoToLogin()
         {
-            RegisterWindow rw = new RegisterWindow();
+            LoginWIndow rw = new LoginWIndow();
             rw.Show();
-            
+
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.DataContext == this)
@@ -24,10 +27,11 @@ namespace CodeTracker.ViewModels
                 }
             }
         }
-        public RelayCommand GoToRegisterCommand { get; }
-        public LoginViewModel()
+        public ICommand GoToLoginCommand { get; }
+
+        public RegisterViewModel()
         {
-            GoToRegisterCommand = new RelayCommand(GoToRegister);
+            GoToLoginCommand = new RelayCommand(GoToLogin);
         }
     }
 }

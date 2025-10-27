@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeTracker.Views"
+        xmlns:vm="clr-namespace:CodeTracker.ViewModels"
         mc:Ignorable="d"
-        Title="Login" Height="250" Width="150">
+        Title="Login" Height="250" Width="250">
+    <Window.DataContext>
+        <vm:LoginViewModel/>
+    </Window.DataContext>
     <StackPanel Margin="10">
         <Label Content="Username"/>
         <TextBox Width="100" HorizontalAlignment="Left"/>
@@ -13,6 +17,6 @@
         <Label Content="Password"/>
         <PasswordBox HorizontalAlignment="Left" Width="100"/>
         <Button Content="Login" Margin="0 20" Width="120" HorizontalAlignment="Left"/>
-        <Button Content="Go to Register" Width="120" HorizontalAlignment="Left"/>
+        <Button Content="Go to Register" Command="{Binding GoToRegisterCommand}" Width="120" HorizontalAlignment="Left"/>
     </StackPanel>
 </Window>
