@@ -2,6 +2,7 @@ import userModel from '../models/user.model';
 import { UserResponse, CreateUserDTO } from '../types/user.types';
 import { AppError } from '../types/common.types';
 import { logger } from '../utils/logger';
+import bcrypt from 'bcrypt';
 
 export class UserService {
     async getAllUsers(): Promise<UserResponse[]> {
@@ -32,7 +33,13 @@ export class UserService {
                 throw new AppError(409, 'Username already exists');
             }
 
-            const userId = await userModel.create(userData);
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+
+            const userId = await userModel.create({
+                username: userData.username,
+                password: hashedPassword
+            });
 
             return {
                 user_id: userId,
@@ -59,7 +66,8 @@ export class UserService {
                 throw new AppError(401, 'Invalid username or password');
             }
 
-            if (user.password !== credentials.password) {
+            const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+            if (!isPasswordValid) {
                 throw new AppError(401, 'Invalid username or password');
             }
 
