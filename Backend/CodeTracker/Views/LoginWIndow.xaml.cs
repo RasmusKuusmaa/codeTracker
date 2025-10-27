@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeTracker.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,14 @@ namespace CodeTracker.Views
         public LoginWIndow()
         {
             InitializeComponent();
+        }
+
+        private void Passbx_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext is LoginViewModel vm)
+            {
+                vm.Password = Passbx.Password;
+            }
         }
     }
 }

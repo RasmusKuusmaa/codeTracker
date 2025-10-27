@@ -27,17 +27,54 @@ namespace CodeTracker.ViewModels
 
         private void Login()
         {
-            MainWindow mw = new MainWindow();
-            mw.Show();
-
-            foreach (Window window in Application.Current.Windows)
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                if (window.DataContext == this)
+                MessageBox.Show("Username and password cannot be empty");
+                return;
+            };
+
+            if (Password == "qwerty" && Username == "test")
+            {
+
+                MainWindow mw = new MainWindow();
+                mw.Show();
+
+                foreach (Window window in Application.Current.Windows)
                 {
-                    window.Close();
+                    if (window.DataContext == this)
+                    {
+                        window.Close();
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Incorrect Credentials");
+                return;
+            }
         }
+
+
+        private string _username;
+
+        public string Username
+        {
+            get { return _username; }
+            set { _username = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _password;
+
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public RelayCommand GoToRegisterCommand { get; }
         public RelayCommand LoginCommand { get; }
         public LoginViewModel()

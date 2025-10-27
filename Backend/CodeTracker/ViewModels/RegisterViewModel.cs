@@ -12,7 +12,7 @@ namespace CodeTracker.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
-    
+
 
         private void GoToLogin()
         {
