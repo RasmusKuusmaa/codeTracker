@@ -16,7 +16,7 @@
 
         <Label Content="Password"/>
         <PasswordBox HorizontalAlignment="Left" Width="100"/>
-        <Button Content="Login" Margin="0 20" Width="120" HorizontalAlignment="Left"/>
+        <Button Content="Login" Command="{Binding LoginCommand}" Margin="0 20" Width="120" HorizontalAlignment="Left"/>
         <Button Content="Go to Register" Command="{Binding GoToRegisterCommand}" Width="120" HorizontalAlignment="Left"/>
     </StackPanel>
 </Window>

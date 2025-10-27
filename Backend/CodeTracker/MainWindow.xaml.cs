@@ -20,4 +20,14 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
     }
+
+    private void DashBoardBtn_Click(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void HistoryBtn_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

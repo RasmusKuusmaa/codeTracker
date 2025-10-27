@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:CodeTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Width="50">
+            <Button Content="DashBoard" x:Name="DashBoardBtn" Click="DashBoardBtn_Click"/>
+            <Button Content="History" x:Name="HistoryBtn" Click="HistoryBtn_Click"/>
+        </StackPanel>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </DockPanel>
 </Window>
