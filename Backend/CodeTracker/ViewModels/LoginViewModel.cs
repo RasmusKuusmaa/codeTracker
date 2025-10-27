@@ -1,4 +1,5 @@
 ﻿using CodeTracker.Helpers;
+using CodeTracker.Service;
 using CodeTracker.Views;
 using System;
 using System.Collections.Generic;
@@ -24,16 +25,17 @@ namespace CodeTracker.ViewModels
                 }
             }
         }
-
-        private void Login()
+        AuthService _authService = new AuthService();
+        private async void Login()
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
                 MessageBox.Show("Username and password cannot be empty");
                 return;
             };
+            bool success = await _authService.LoginAsync(Username, Password);
 
-            if (Password == "qwerty" && Username == "test")
+            if (success)
             {
 
                 MainWindow mw = new MainWindow();

@@ -35,5 +35,23 @@ namespace CodeTracker.Service
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> LoginAsync(string username, string password)
+        {
+            var payload = new
+            {
+                username = username,
+                password = password,
+            };
+
+            var content = new StringContent(
+                JsonSerializer.Serialize(payload),
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await _httpClient.PostAsync("http://localhost:5020/login", content);
+
+            return response.IsSuccessStatusCode;
+        }
     }
 }

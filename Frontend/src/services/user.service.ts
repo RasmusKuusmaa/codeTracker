@@ -23,8 +23,8 @@ export class UserService {
                 throw new AppError(400, 'Username is required');
             }
 
-            if (!userData.password || userData.password.length < 6) {
-                throw new AppError(400, 'Password must be at least 6 characters');
+            if (!userData.password) {
+                throw new AppError(400, 'Password is required');
             }
 
             const existingUser = await userModel.findByUsername(userData.username);
