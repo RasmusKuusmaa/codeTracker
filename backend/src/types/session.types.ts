@@ -8,6 +8,7 @@ export interface Session{
     languages?: Language[];
 
 }
+export interface SessionRow extends RowDataPacket, Session {}
 
 export interface Language {
     id:number;
