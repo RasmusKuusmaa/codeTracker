@@ -1,14 +1,14 @@
 import database from "@config/database";
 import { AppError } from "../types/common.types";
-import { SessionRow } from "../types/session.types";
+import { CsessionRow } from "../types/csession.types";
 
 
 export class SessionModel {
     private pool = database.getPool();
 
-    async findAllSessions(): Promise<SessionRow[]> {
+    async findAllSessions(): Promise<CsessionRow[]> {
         try {
-                const [rows] = await this.pool.query<SessionRow[]>(
+                const [rows] = await this.pool.query<CsessionRow[]>(
                     `SELECT session_id,
                         user_id, 
                         time_started,
@@ -21,3 +21,5 @@ export class SessionModel {
         }
     }
 }
+
+export default new SessionModel();
