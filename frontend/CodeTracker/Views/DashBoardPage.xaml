@@ -9,6 +9,6 @@
       Title="DashBoardPage">
 
     <Grid>
-        <Label Content="Dashboard"/>
+        <Label Content="Welcome" x:Name="welcometxt"/>
     </Grid>
 </Page>

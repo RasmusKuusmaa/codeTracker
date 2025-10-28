@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -51,7 +52,31 @@ namespace CodeTracker.Service
 
             var response = await _httpClient.PostAsync("http://localhost:5020/login", content);
 
-            return response.IsSuccessStatusCode;
+            if (!response.IsSuccessStatusCode)
+                return false;
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            var result = JsonSerializer.Deserialize<LoginResponse>(responseBody, options);
+
+            if (result?.Success == true && result.Data != null)
+            {
+                UserSession.CurrentUser = new User
+                {
+                    UserId = result.Data.UserId,
+                    UserName = result.Data.Username,
+                    Token = result.Data.Token
+                };
+
+                return true;
+            }
+
+            return false;
         }
     }
 }
