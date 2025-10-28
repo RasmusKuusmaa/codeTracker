@@ -24,7 +24,6 @@ namespace CodeTracker.Views
         public DashBoardPage()
         {
             InitializeComponent();
-            welcometxt.Content = $"Welcome {UserSession.CurrentUser.UserName}";
         }
     }
 }
