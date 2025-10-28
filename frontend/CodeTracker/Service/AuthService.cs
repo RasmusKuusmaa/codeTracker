@@ -16,7 +16,10 @@ namespace CodeTracker.Service
 
         public AuthService()
         {
-            _httpClient = new HttpClient();
+            _httpClient = new HttpClient()
+            {
+                BaseAddress = new Uri($"{UserSession.BaseUrl}auth/")
+            };
         }
 
         public async Task<bool> RegisterAsync(string username, string password)
@@ -32,7 +35,7 @@ namespace CodeTracker.Service
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.PostAsync("http://localhost:5020/register", content);
+            var response = await _httpClient.PostAsync("/register", content);
 
             return response.IsSuccessStatusCode;
         }
@@ -50,7 +53,7 @@ namespace CodeTracker.Service
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.PostAsync("http://localhost:5020/login", content);
+            var response = await _httpClient.PostAsync("login", content);
 
             if (!response.IsSuccessStatusCode)
                 return false;

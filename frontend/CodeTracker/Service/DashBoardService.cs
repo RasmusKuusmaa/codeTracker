@@ -13,7 +13,11 @@ namespace CodeTracker.Service
 {
     public class DashBoardService
     {
-        HttpClient _httpClient = new HttpClient();
+        HttpClient _httpClient = new HttpClient()
+        {
+            BaseAddress = new Uri($"{UserSession.BaseUrl}user/")
+
+        };
 
         public async Task<List<Session>> GetSessionsAsync()
         {
@@ -23,7 +27,7 @@ namespace CodeTracker.Service
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", UserSession.CurrentUser.Token);
 
-            var response = await _httpClient.GetAsync("http://localhost:5020/sessions");
+            var response = await _httpClient.GetAsync("sessions");
 
             response.EnsureSuccessStatusCode();
 
