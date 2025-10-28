@@ -4,9 +4,9 @@ import { logger } from "@utils/logger";
 
 
 export class SessionService {
-    async getAllSessions(): Promise<Csession[]> {
+    async getAllSessions(userId: number): Promise<Csession[]> {
         try {
-            const sessions = await sessionModel.findAllSessions();
+            const sessions = await sessionModel.findAllSessions(userId);
             return sessions.map(session => ({
                 session_id: session.session_id,
                 user_id: session.user_id,

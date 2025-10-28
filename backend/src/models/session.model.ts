@@ -6,14 +6,17 @@ import { CsessionRow } from "../types/csession.types";
 export class SessionModel {
     private pool = database.getPool();
 
-    async findAllSessions(): Promise<CsessionRow[]> {
+    async findAllSessions(userId: number): Promise<CsessionRow[]> {
         try {
                 const [rows] = await this.pool.query<CsessionRow[]>(
                     `SELECT session_id,
-                        user_id, 
+                        user_id,
                         time_started,
                         time_ended,
-                        title from sessions; `
+                        title
+                    FROM sessions
+                    WHERE user_id = ?`,
+                    [userId]
                 );
                 return rows;
         } catch (error) {

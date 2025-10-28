@@ -7,7 +7,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 export class SessionController {
     async getAllSessions(request: FastifyRequest, reply: FastifyReply): Promise<void> {
         try {
-            const sessions = await sessionService.getAllSessions();
+            const userId = request.user!.user_id;
+            const sessions = await sessionService.getAllSessions(userId);
 
             const response: ApiResponse = {
                 success: true,
