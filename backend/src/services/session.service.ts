@@ -10,6 +10,7 @@ export class SessionService {
             return sessions.map(session => ({
                 session_id: session.session_id,
                 user_id: session.user_id,
+                project_id: session.project_id,
                 time_started: session.time_started,
                 time_ended: session.time_ended,
                 title: session.title

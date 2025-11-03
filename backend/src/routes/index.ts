@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify';
 import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import sessionRoutes from './session.routes';
+import projectRoutes from './project.routes';
 
 async function routes(fastify: FastifyInstance) {
     // Register all routes under /api prefix
@@ -21,6 +22,7 @@ async function routes(fastify: FastifyInstance) {
         // User and session routes under /api/user
         await api.register(userRoutes, { prefix: '/user' });
         await api.register(sessionRoutes, { prefix: '/user' });
+        await api.register(projectRoutes, { prefix: '/user' });
     }, { prefix: '/api' });
 }
 

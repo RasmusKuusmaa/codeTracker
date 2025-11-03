@@ -11,6 +11,7 @@ export class SessionModel {
                 const [rows] = await this.pool.query<CsessionRow[]>(
                     `SELECT session_id,
                         user_id,
+                        project_id,
                         time_started,
                         time_ended,
                         title

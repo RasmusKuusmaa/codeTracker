@@ -3,6 +3,7 @@ import { RowDataPacket } from 'mysql2';
 export interface Csession{
     session_id: number;
     user_id:number;
+    project_id?: number | null;
     time_started?: string | null;
     time_ended?:string | null;
     title: string;
