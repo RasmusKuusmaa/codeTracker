@@ -2,6 +2,7 @@ using CodeTracker.Helpers;
 using CodeTracker.Models;
 using CodeTracker.Service;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace CodeTracker.ViewModels
         private ObservableCollection<Session> _languageSessions;
         private LanguageStats? _selectedLanguage;
         private bool _showLanguageSessions;
+        private ObservableCollection<ChartDataPoint> _chartData;
 
         public ObservableCollection<LanguageStats> LanguageStats
         {
@@ -25,6 +27,16 @@ namespace CodeTracker.ViewModels
             set
             {
                 _languageStats = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<ChartDataPoint> ChartData
+        {
+            get => _chartData;
+            set
+            {
+                _chartData = value;
                 OnPropertyChanged();
             }
         }
@@ -67,6 +79,7 @@ namespace CodeTracker.ViewModels
         {
             _languageStats = new ObservableCollection<LanguageStats>();
             _languageSessions = new ObservableCollection<Session>();
+            _chartData = new ObservableCollection<ChartDataPoint>();
 
             LoadLanguageStatsCommand = new RelayCommand(async () => await ExecuteLoadLanguageStatsAsync());
             ViewLanguageSessionsCommand = new RelayCommand<LanguageStats>(async (lang) => await ExecuteViewLanguageSessionsAsync(lang));
@@ -85,10 +98,28 @@ namespace CodeTracker.ViewModels
                 {
                     LanguageStats.Add(stat);
                 }
+
+                UpdateChartData();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error loading language stats: {ex.Message}");
+            }
+        }
+
+        private void UpdateChartData()
+        {
+            var chartDataPoints = ChartColors.CreateChartData(
+                LanguageStats.ToDictionary(
+                    l => l.Name,
+                    l => (double)l.TotalSeconds
+                )
+            );
+
+            ChartData.Clear();
+            foreach (var point in chartDataPoints)
+            {
+                ChartData.Add(point);
             }
         }
 

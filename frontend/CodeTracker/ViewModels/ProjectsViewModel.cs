@@ -2,6 +2,7 @@ using CodeTracker.Helpers;
 using CodeTracker.Models;
 using CodeTracker.Service;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace CodeTracker.ViewModels
         private ObservableCollection<Session> _projectSessions;
         private Project? _selectedProject;
         private bool _showProjectSessions;
+        private ObservableCollection<ChartDataPoint> _chartData;
 
         public ObservableCollection<Project> Projects
         {
@@ -25,6 +27,16 @@ namespace CodeTracker.ViewModels
             set
             {
                 _projects = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<ChartDataPoint> ChartData
+        {
+            get => _chartData;
+            set
+            {
+                _chartData = value;
                 OnPropertyChanged();
             }
         }
@@ -68,6 +80,7 @@ namespace CodeTracker.ViewModels
         {
             _projects = new ObservableCollection<Project>();
             _projectSessions = new ObservableCollection<Session>();
+            _chartData = new ObservableCollection<ChartDataPoint>();
 
             LoadProjectsCommand = new RelayCommand(async () => await ExecuteLoadProjectsAsync());
             ViewProjectSessionsCommand = new RelayCommand<Project>(async (project) => await ExecuteViewProjectSessionsAsync(project));
@@ -87,10 +100,28 @@ namespace CodeTracker.ViewModels
                 {
                     Projects.Add(project);
                 }
+
+                UpdateChartData();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error loading projects: {ex.Message}");
+            }
+        }
+
+        private void UpdateChartData()
+        {
+            var chartDataPoints = ChartColors.CreateChartData(
+                Projects.ToDictionary(
+                    p => p.Name,
+                    p => (double)p.TotalTimeSeconds
+                )
+            );
+
+            ChartData.Clear();
+            foreach (var point in chartDataPoints)
+            {
+                ChartData.Add(point);
             }
         }
 
@@ -129,6 +160,7 @@ namespace CodeTracker.ViewModels
             {
                 await _projectService.DeleteProjectAsync(project.ProjectId);
                 Projects.Remove(project);
+                UpdateChartData();
 
                 if (SelectedProject?.ProjectId == project.ProjectId)
                 {

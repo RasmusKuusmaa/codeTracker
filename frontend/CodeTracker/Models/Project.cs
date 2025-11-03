@@ -27,6 +27,8 @@ namespace CodeTracker.Models
         [JsonPropertyName("updated_at")]
         public DateTime? UpdatedAt { get; set; }
 
+        public int TotalTimeSeconds => TotalTimeMinutes * 60;
+
         public string FormattedTotalTime
         {
             get
