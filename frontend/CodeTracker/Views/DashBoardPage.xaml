@@ -11,7 +11,7 @@
     <Page.DataContext>
         <vm:DashBoardViewModel/>
     </Page.DataContext>
-    <Grid>
-        <ListBox ItemsSource="{Binding Sessions}" DisplayMemberPath="Title" />
-    </Grid>
+    <StackPanel>
+        <Label Content="dashboard"/>
+    </StackPanel>
 </Page>
