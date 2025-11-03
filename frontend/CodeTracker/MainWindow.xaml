@@ -5,12 +5,167 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeTracker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Right" Width="50">
-            <Button Content="DashBoard" x:Name="DashBoardBtn" Click="DashBoardBtn_Click"/>
-            <Button Content="History" x:Name="HistoryBtn" Click="HistoryBtn_Click"/>
-        </StackPanel>
-        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
-    </DockPanel>
+        Title="CodeTracker" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#2C3E50" Padding="0">
+            <StackPanel>
+                <Border Background="#1A252F" Padding="20" Margin="0,0,0,20">
+                    <TextBlock Text="CodeTracker" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                </Border>
+
+                <Button x:Name="DashBoardBtn" Click="DashBoardBtn_Click"
+                       Height="50" Margin="10,5" FontSize="16" HorizontalContentAlignment="Left" Padding="20,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#34495E"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📊" FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="Dashboard" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="ProjectsBtn" Click="ProjectsBtn_Click"
+                       Height="50" Margin="10,5" FontSize="16" HorizontalContentAlignment="Left" Padding="20,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#34495E"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📁" FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="Projects" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="SessionsBtn" Click="SessionsBtn_Click"
+                       Height="50" Margin="10,5" FontSize="16" HorizontalContentAlignment="Left" Padding="20,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#34495E"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⏱️" FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="Sessions" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="LanguagesBtn" Click="LanguagesBtn_Click"
+                       Height="50" Margin="10,5" FontSize="16" HorizontalContentAlignment="Left" Padding="20,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#34495E"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="💻" FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="Languages" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="HistoryBtn" Click="HistoryBtn_Click"
+                       Height="50" Margin="10,5" FontSize="16" HorizontalContentAlignment="Left" Padding="20,0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="0" CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#34495E"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📜" FontSize="20" Margin="0,0,10,0"/>
+                        <TextBlock Text="History" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Background="#F5F5F5"/>
+    </Grid>
 </Window>

@@ -12,16 +12,12 @@ using System.Windows.Shapes;
 
 namespace CodeTracker;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
         MainFrame.Navigate(new DashBoardPage());
-
     }
 
     private void DashBoardBtn_Click(object sender, RoutedEventArgs e)
@@ -29,9 +25,23 @@ public partial class MainWindow : Window
         MainFrame.Navigate(new DashBoardPage());
     }
 
+    private void ProjectsBtn_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Navigate(new ProjectsPage());
+    }
+
+    private void SessionsBtn_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Navigate(new SessionsPage());
+    }
+
+    private void LanguagesBtn_Click(object sender, RoutedEventArgs e)
+    {
+        MainFrame.Navigate(new LanguagesPage());
+    }
+
     private void HistoryBtn_Click(object sender, RoutedEventArgs e)
     {
         MainFrame.Navigate(new HistoryPage());
-
     }
 }
