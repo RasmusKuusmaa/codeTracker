@@ -3,6 +3,7 @@ import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import sessionRoutes from './session.routes';
 import projectRoutes from './project.routes';
+import languageRoutes from './language.routes';
 
 async function routes(fastify: FastifyInstance) {
     // Register all routes under /api prefix
@@ -23,6 +24,7 @@ async function routes(fastify: FastifyInstance) {
         await api.register(userRoutes, { prefix: '/user' });
         await api.register(sessionRoutes, { prefix: '/user' });
         await api.register(projectRoutes, { prefix: '/user' });
+        await api.register(languageRoutes, { prefix: '/user' });
     }, { prefix: '/api' });
 }
 
